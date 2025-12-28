@@ -1,4 +1,4 @@
-# Sai Kothapalli — Personal Blog
+# Sai Soundararajan — Personal Blog
 
 Personal portfolio and blog built with Astro, deployed to Cloudflare Pages.
 
