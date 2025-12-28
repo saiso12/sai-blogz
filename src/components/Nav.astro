@@ -1,0 +1,25 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const links = [
+  { href: '/', label: 'Projects' },
+  { href: '/writing', label: 'Writing' },
+  { href: '/now', label: 'Now' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<nav>
+    {links.map(link => (
+        <a
+            href={link.href}
+            class:list={[{ active: currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }]}
+        >
+            {link.label}
+        </a>
+    ))}
+</nav>

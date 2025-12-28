@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Profile from '../components/Profile.astro';
+import Nav from '../components/Nav.astro';
+import Currently from '../components/Currently.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PostItem from '../components/PostItem.astro';
+import Footer from '../components/Footer.astro';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const posts = (await getCollection('writing'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+---
+
+<BaseLayout title="Sai Kothapalli — Builder">
+  <div class="container">
+    <Profile
+      name="Sai Kothapalli"
+      initials="SK"
+      role="Platform Engineering Lead"
+      company="SpotOn"
+      github="https://github.com/saiso12"
+    />
+
+    <Nav currentPath="/" />
+
+    <Currently text="Building <strong>AI network diagnostics</strong> with MCP servers. Shipping Envoy Gateway migration. Planning 2026 goals." />
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Building</h2>
+      </div>
+      <div class="projects-grid">
+        {projects.map(project => (
+          <ProjectCard
+            title={project.data.title}
+            description={project.data.description}
+            status={project.data.status}
+            url={project.data.url}
+            meta={project.data.meta}
+            slug={project.slug}
+          />
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Writing</h2>
+      </div>
+      <div class="posts">
+        {posts.map(post => (
+          <PostItem
+            title={post.data.title}
+            date={post.data.date}
+            tag={post.data.tag}
+            slug={post.slug}
+          />
+        ))}
+      </div>
+    </section>
+
+    <Footer />
+  </div>
+</BaseLayout>

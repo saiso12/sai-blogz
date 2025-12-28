@@ -1,0 +1,12 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="currently">
+    <span class="currently-label">Now</span>
+    <span class="currently-text" set:html={text} />
+</div>

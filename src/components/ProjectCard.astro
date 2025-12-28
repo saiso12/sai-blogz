@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  status: 'in-progress' | 'shipped' | 'paused';
+  url?: string;
+  meta: string;
+  slug: string;
+}
+
+const { title, description, status, url, meta, slug } = Astro.props;
+
+const statusClass = status === 'shipped' ? 'shipped' : status === 'paused' ? 'paused' : '';
+const statusLabel = status === 'in-progress' ? 'In Progress' : status === 'shipped' ? 'Shipped' : 'Paused';
+
+const href = url || `/projects/${slug}`;
+const isExternal = url?.startsWith('http');
+---
+
+<a href={href} class="project-tile" target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined}>
+    <div class="project-top">
+        <span class:list={["project-status", statusClass]}>{statusLabel}</span>
+        {isExternal ? (
+            <svg class="project-link-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+        ) : (
+            <svg class="project-link-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+        )}
+    </div>
+    <div class="project-title">{title}</div>
+    <div class="project-desc">{description}</div>
+    <div class="project-meta">
+        {status === 'shipped' ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        ) : status === 'paused' ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="10" y1="15" x2="10" y2="9"/><line x1="14" y1="15" x2="14" y2="9"/></svg>
+        ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        )}
+        {meta}
+    </div>
+</a>

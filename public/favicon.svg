@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="olive-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7a8c42"/>
+      <stop offset="100%" stop-color="#9ab44e"/>
+    </linearGradient>
+  </defs>
+  <circle cx="16" cy="16" r="15" fill="url(#olive-gradient)"/>
+  <text x="16" y="21" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#0a0d07" text-anchor="middle">SK</text>
+</svg>
