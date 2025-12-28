@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import PostItem from '../../components/PostItem.astro';
+import TagFilter from '../../components/TagFilter.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = (await getCollection('writing'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Build tag counts
+const tagCounts = posts.reduce((acc, post) => {
+  acc[post.data.tag] = (acc[post.data.tag] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+
+const tags = Object.entries(tagCounts)
+  .map(([name, count]) => ({ name, count }))
+  .sort((a, b) => b.count - a.count);
+---
+
+<BaseLayout title="Writing — Sai Soundararajan">
+  <div class="container">
+    <a href="/" class="back-link">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back
+    </a>
+
+    <section class="section">
+      <div class="section-header">
+        <h1 class="page-title">Writing</h1>
+      </div>
+
+      <TagFilter tags={tags} />
+
+      <div class="posts">
+        {posts.map(post => (
+          <PostItem
+            title={post.data.title}
+            date={post.data.date}
+            tag={post.data.tag}
+            slug={post.slug}
+          />
+        ))}
+      </div>
+    </section>
+
+    <Footer />
+  </div>
+</BaseLayout>
