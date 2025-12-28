@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Profile from '../components/Profile.astro';
 import Nav from '../components/Nav.astro';
-import Currently from '../components/Currently.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PostItem from '../components/PostItem.astro';
 import TagFilter from '../components/TagFilter.astro';
@@ -40,8 +39,6 @@ const tags = Object.entries(tagCounts)
     />
 
     <Nav currentPath="/" />
-
-    <Currently text="Building <strong>AI network diagnostics</strong> with MCP servers. Shipping Envoy Gateway migration. Planning 2026 goals." />
 
     <section class="section">
       <div class="section-header">
