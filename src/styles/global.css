@@ -70,15 +70,12 @@ body {
     margin-bottom: 4px;
 }
 
-.role {
+.bio {
     font-size: 14px;
     color: var(--text-muted);
     margin-bottom: 16px;
-}
-
-.role strong {
-    color: var(--olive-bright);
-    font-weight: 500;
+    line-height: 1.6;
+    max-width: 480px;
 }
 
 .social-links {

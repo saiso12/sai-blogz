@@ -2,8 +2,7 @@
 interface Props {
   name: string;
   initials: string;
-  role: string;
-  company: string;
+  bio?: string;
   github?: string;
   twitter?: string;
   linkedin?: string;
@@ -12,8 +11,7 @@ interface Props {
 const {
   name,
   initials,
-  role,
-  company,
+  bio,
   github,
   twitter,
   linkedin
@@ -24,7 +22,7 @@ const {
     <div class="avatar">{initials}</div>
     <div class="profile-info">
         <h1 class="name">{name}</h1>
-        <p class="role">{role} at <strong>{company}</strong></p>
+        {bio && <p class="bio">{bio}</p>}
         <div class="social-links">
             {github && (
                 <a href={github} class="social-link" title="GitHub">
