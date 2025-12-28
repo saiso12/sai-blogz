@@ -1,12 +1,31 @@
 ---
-interface Props {
-  text: string;
+interface NowItem {
+  label: string;
+  value: string;
+  link?: string;
 }
 
-const { text } = Astro.props;
+interface Props {
+  items: NowItem[];
+}
+
+const { items } = Astro.props;
 ---
 
-<div class="currently">
-    <span class="currently-label">Now</span>
-    <span class="currently-text" set:html={text} />
+<div class="now-bar">
+    {items.map((item, i) => (
+        <>
+            <div class="now-item">
+                <span class="now-label">{item.label}</span>
+                {item.link ? (
+                    <a href={item.link} class="now-value" target={item.link.startsWith('http') ? '_blank' : undefined}>
+                        {item.value}
+                    </a>
+                ) : (
+                    <span class="now-value">{item.value}</span>
+                )}
+            </div>
+            {i < items.length - 1 && <span class="now-sep">|</span>}
+        </>
+    ))}
 </div>

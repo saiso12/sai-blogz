@@ -41,7 +41,11 @@ const tags = Object.entries(tagCounts)
 
     <Nav currentPath="/" />
 
-    <Currently text="Building <strong>AI network diagnostics</strong> with MCP servers. Shipping Envoy Gateway migration. Planning 2026 goals." />
+    <Currently items={[
+      { label: "Reading", value: "Staff Engineer", link: "https://staffeng.com/book" },
+      { label: "Learning", value: "MCP Servers" },
+      { label: "Location", value: "Bay Area" }
+    ]} />
 
     <section class="section">
       <div class="section-header">
