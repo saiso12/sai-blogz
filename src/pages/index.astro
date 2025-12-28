@@ -5,6 +5,7 @@ import Profile from '../components/Profile.astro';
 import Nav from '../components/Nav.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PostItem from '../components/PostItem.astro';
+import Newsletter from '../components/Newsletter.astro';
 import Footer from '../components/Footer.astro';
 
 const projects = (await getCollection('projects'))
@@ -76,6 +77,8 @@ const tags = Object.entries(tagCounts)
         <a href="/writing" class="view-all-link">View all posts →</a>
       )}
     </section>
+
+    <Newsletter buttondownUsername="sai" />
 
     <Footer />
   </div>

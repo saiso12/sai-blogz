@@ -1,0 +1,29 @@
+---
+interface Props {
+  buttondownUsername?: string;
+}
+
+const { buttondownUsername = "sai" } = Astro.props;
+---
+
+<section class="newsletter">
+    <div class="newsletter-content">
+        <h3 class="newsletter-title">Stay updated</h3>
+        <p class="newsletter-desc">Essays on infrastructure, leadership, and building systems that last.</p>
+    </div>
+    <form
+        action={`https://buttondown.com/api/emails/embed-subscribe/${buttondownUsername}`}
+        method="post"
+        target="popupwindow"
+        class="newsletter-form"
+    >
+        <input
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+            class="newsletter-input"
+        />
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+    </form>
+</section>
