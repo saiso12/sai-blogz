@@ -1,15 +1,20 @@
 ---
-interface Props {
-  currentPath?: string;
+interface Tag {
+  name: string;
+  count: number;
 }
 
-const { currentPath = '/' } = Astro.props;
+interface Props {
+  currentPath?: string;
+  tags?: Tag[];
+  activeTag?: string;
+}
+
+const { currentPath = '/', tags = [], activeTag } = Astro.props;
 
 const links = [
   { href: '/', label: 'Projects' },
   { href: '/writing', label: 'Writing' },
-  { href: '/now', label: 'Now' },
-  { href: '/about', label: 'About' },
 ];
 ---
 
@@ -22,4 +27,17 @@ const links = [
             {link.label}
         </a>
     ))}
+    {tags.length > 0 && (
+        <>
+            <span class="nav-sep">|</span>
+            {tags.map(tag => (
+                <a
+                    href={`/writing/tag/${tag.name}`}
+                    class:list={["nav-tag", { active: activeTag === tag.name }]}
+                >
+                    {tag.name} <span class="nav-tag-count">{tag.count}</span>
+                </a>
+            ))}
+        </>
+    )}
 </nav>

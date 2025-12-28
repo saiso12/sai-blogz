@@ -5,7 +5,6 @@ import Profile from '../components/Profile.astro';
 import Nav from '../components/Nav.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PostItem from '../components/PostItem.astro';
-import TagFilter from '../components/TagFilter.astro';
 import Footer from '../components/Footer.astro';
 
 const projects = (await getCollection('projects'))
@@ -38,7 +37,7 @@ const tags = Object.entries(tagCounts)
       github="https://github.com/saiso12"
     />
 
-    <Nav currentPath="/" />
+    <Nav currentPath="/" tags={tags} />
 
     <section class="section">
       <div class="section-header">
@@ -62,7 +61,6 @@ const tags = Object.entries(tagCounts)
       <div class="section-header">
         <h2 class="section-title">Writing</h2>
       </div>
-      <TagFilter tags={tags} />
       <div class="posts">
         {posts.map(post => (
           <PostItem
